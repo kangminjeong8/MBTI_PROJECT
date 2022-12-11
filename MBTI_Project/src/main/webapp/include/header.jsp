@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+     <!-- Bootstrap Core CSS -->
+    <link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,22 +57,25 @@
 							<h1 class="display-5 fw-bolder text-white mb-2">
 							16Personalities 검사가 너무 정확해 "살짝 소름이 돋을 정도예요"라고 성격 유형 검사를 마친 한 참여자는 말했습니다.
 							</h1>
-							<p class="lead fw-normal text-white-50 mb-4">Quickly design
-								and customize responsive mobile-first sites with Bootstrap, the
-								world’s most popular front-end open source toolkit!</p>
+							<p class="lead fw-normal text-white-50 mb-4">
+							쉽고 간단하면서도 정확한 성격 유형 검사를 통해 당신이 누구이며, 왜 그러한 특정 행동 성향을 보이는지 확인하십시오.</p>
 							<div
 								class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
 								<a class="btn btn-primary btn-lg px-4 me-sm-3" 
-								href="#features"> 검사를 시작하세요
+								href="#features"> TEST START
 								</a>
-
-
-							</div>
+								
+								<a class="btn btn-primary btn-lg px-4 me-sm-3" 
+								href="#features"> 16 PERSONALITY
+								</a>
+							</div> 
+							
+							
 						</div>
 					</div>
 					<div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
 						<img class="img-fluid rounded-3 my-5"
-							src="https://dummyimage.com/600x400/343a40/6c757d" alt="mbti" />
+							src="C:\Users\USER\Desktop\민정" alt="mbti.jpg" />
 					</div>
 				</div>
 			</div>
