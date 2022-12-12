@@ -12,7 +12,7 @@
 
 
 	<div class="container">
-		<h3>MBTI 게시판</h3>
+		<h3>My Web게시판</h3>
 
 		<table class="table table-bordered">
 			<thead>
@@ -22,27 +22,21 @@
 					<th>작성자</th>
 					<th>제목</th>
 					<th>날짜</th>
+					<th>조회수</th>
 				</tr>
 			</thead>
 
-			
 			<tbody>
-				<c:forEach var = "vo" items = "${list }" varStatus = "num">
 					<tr>
 						<td>${num.count }</td>
-						<td>${vo.board_num }</td>
-						<td>[${vo.mbti}] ${vo.user_id }</td>
-						<td>
-						<a href ="board_content.board?board_num=${vo.board_num }user_id=${vo.user_id }">${vo.title }</a>
-						</td>
-						<td>
-						<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
-						</td>
+						<td>${vo.bno }</td>
+						<td>${vo.writer }</td>
 						<td> 
-							<a href =" "></a>
+							<a href = "board_content.board?bno=${vo.bno }">${vo.title }</a>
 						</td>
+						<%-- <td><fmt:formatDate value = "" pattern = ""/></td> --%>
+						<td>${vo.hit }</td>
 					</tr>
-				</c:forEach>
 			</tbody>
 			
 			<tbody>
@@ -52,7 +46,7 @@
 						  <div class="form-group">
 						    <input type="text" name="search" placeholder="제목검색" class="form-control" >
 						  	<input type="submit" value="검색" class="btn btn-default">
-							<input type="button" value="글 작성" class="btn btn-default" onclick = "location.href ='board_write.board'">
+							<input type="button" value="글 작성" class="btn btn-default" onclick = "location href ='board_write.board'">
 						  </div>
 						</form> 
 					</td>
