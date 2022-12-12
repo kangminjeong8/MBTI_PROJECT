@@ -27,12 +27,9 @@ public class BoardDAO {
 	}
 	
 	//DB접속 위한 기본 셋팅
-//	String URL = "jdbc:oracle:thin:@172.30.1.61:1521:xe";
-//	String UID = "MBTI";
-//	String UPW = "mbti";
-	String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	String UID = "com02";
-	String UPW = "com02";
+	String URL = "jdbc:oracle:thin:@172.30.1.44:1521:xe";
+	String UID = "MBTI";
+	String UPW = "mbti";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -114,12 +111,14 @@ public class BoardDAO {
 	public BoardVO getContent(String board_num) {
 		BoardVO vo = null;
 		
-		String sql = "select boardnumber, b.historynumber, h.mbti, id, title, content, regdate from board b\r\n"
-				+ "inner join history h on b.historynumber = h.historynumber order by boardnumber desc";
+		System.out.println(board_num + "test");
+		String sql = "select boardnumber, b.historynumber, mbti, id, title, content, regdate from board b\r\n"
+				+ "inner join history h on h.historynumber = b.historynumber where boardnumber = ?";
 		
 		try {
 			conn = DriverManager.getConnection(URL, UID, UPW);
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board_num);
 			
 			rs = pstmt.executeQuery();
 			
@@ -232,8 +231,143 @@ public class BoardDAO {
 			System.out.println(result);
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+			try {
+				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch (Exception e2) {
+				System.out.println("close에러");
+			}
 		}
 		
+		return result;
+	}
+	
+	public int getCountNum(String board_num) {
+		int result = 0;
+		String sql = "select count(*) as numOfComment from comments where boardnumber = ?";
+		
+		try {
+			conn = DriverManager.getConnection(URL, UID, UPW);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board_num);
+			
+			pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("numOfComment");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch (Exception e2) {
+				System.out.println("close에러");
+			}
+		}
+		
+		
+		return result;
+	}
+	
+	//게시판의 댓글 불러오기 (매개변수로 게시판 번호 받아야함)
+	public ArrayList<CommentVO>	 getComment(int board_num){
+		ArrayList<CommentVO> list = new ArrayList<>();
+		
+		String sql = "select * from comments where boardnumber= ? order by commentnum asc";
+		
+		try {
+			conn = DriverManager.getConnection(URL, UID, UPW);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_num);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int commentnum = rs.getInt("commentnum");
+				String id = rs.getString("id");
+				int boardnumber = rs.getInt("boardnumber");
+				String comment = rs.getString("comment");
+				Timestamp date = rs.getTimestamp("date");
+				
+				System.out.println(comment);
+				
+				CommentVO vo = new CommentVO(commentnum, id, boardnumber, comment, date);
+				list.add(vo);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch (Exception e2) {
+				System.out.println("close에러");
+			}
+		}
+		
+		return list;
+	}
+	
+	public int writeComment(String id, String board_num, String comment) {
+		int result = 0;
+		
+		String sql = "insert into comments values(commentnum_seq, ?, ?, ?, sysdate)";
+		
+		try {
+			conn = DriverManager.getConnection(URL, UID, UPW);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, board_num);
+			pstmt.setString(3, comment);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch (Exception e2) {
+				System.out.println("close에러");
+			}
+		}
+		
+		return result;
+	}
+	
+	public int deleteComment(String comment_num) {
+		int result = 0;
+		String sql = "delete from comments where commentnum = ?";
+		
+		try {
+			conn = DriverManager.getConnection(URL,UID,UPW);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, comment_num);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch (Exception e2) {
+				System.out.println("close에러");
+			}
+		}
 		return result;
 	}
 	

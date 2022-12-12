@@ -55,12 +55,7 @@
 
 			</table>
 			<input type="submit" value="정보수정">
-			<!--
-          JS로 기능을 붙임
-          onclick = "location.href ='경로' 
-         -->
-			<input type="button" value="마이페이지"
-				onclick="location.herf = 'user_mypage.user' ">
+			<input type="button" value="마이페이지" onclick="location.herf='user_mypage.user'">
 
 		</form>
 	</div>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import board_model.BoardDAO;
 import board_model.BoardVO;
+import board_model.CommentVO;
 
 public class BoardServiceImpl implements BoardService{
 	
@@ -80,4 +81,49 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 	
+	@Override
+	public int getCountNum(HttpServletRequest request, HttpServletResponse response) {
+		String board_num = (String) request.getAttribute("board_num");
+		
+		int result = BoardDAO.getInstance().getCountNum(board_num);
+		
+		return result;
+	}
+	
+	
+	@Override
+	public ArrayList<CommentVO> getComment(HttpServletRequest request, HttpServletResponse response) {
+		
+		int board_num = (int) request.getAttribute("board_num");
+		
+		ArrayList<CommentVO> list = BoardDAO.getInstance().getComment(board_num);
+		System.out.println(list.toString());
+		
+		return list;
+	}
+
+	@Override
+	public int writeComment(HttpServletRequest request, HttpServletResponse response) {
+		int result = 0;
+		HttpSession session = request.getSession();
+		
+		String id = (String)session.getAttribute("user_id");
+		String board_num = request.getParameter("board_num");
+		String comment = request.getParameter("comment");
+		
+		//댓글번호는 시퀀스, id는 세션, date sysdate
+		//게시판번호, historynumber, commment 받아야나?
+		result = BoardDAO.getInstance().writeComment(id, board_num, comment);
+		
+		return result;
+	}
+	
+	@Override
+	public int deleteComment(HttpServletRequest request, HttpServletResponse response) {
+		int result = 0;
+		String comment_num = (String)request.getParameter("comment_num");
+		
+		result = BoardDAO.getInstance().deleteComment(comment_num);
+		return result;
+	}
 }
