@@ -87,7 +87,7 @@ public class user_controller extends HttpServlet {
 				session.setAttribute("user_name", vo.getName());
 				
 				//마이페이지
-				response.sendRedirect("../index.main");
+				response.sendRedirect("user_mypage.user");
 			}
 			
 			break;
@@ -101,7 +101,7 @@ public class user_controller extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			session.invalidate(); //세션 무효화
-			System.out.println("로그아웃 체크");
+			
 			//response.sendRedirect("/JSPWeb/index.main"); //메인으로
 			response.sendRedirect(path + "/index.main");
 			

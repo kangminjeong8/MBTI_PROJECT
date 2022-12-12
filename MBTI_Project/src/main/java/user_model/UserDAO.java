@@ -26,8 +26,8 @@ public class UserDAO {
 	}
 
 	public String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	public String UID = "com02";
-	public String UPW = "com02";
+	public String UID = "MBTI";
+	public String UPW = "mbti";
 
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -221,6 +221,3 @@ public class UserDAO {
 
 
 }
-
-
-
