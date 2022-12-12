@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import board_model.BoardVO;
+import board_model.CommentVO;
 import board_service.BoardService;
 import board_service.BoardServiceImpl;
 
@@ -85,10 +86,14 @@ public class board_controller extends HttpServlet {
 			break;
 
 		case "/board/board_content.board":
-			
+			//게시판 내용 받아오기
 			BoardVO vo = service.getContent(request, response);
-			
 			request.setAttribute("vo", vo);
+
+			//댓글 내용 받아오기
+			request.setAttribute("board_num", vo.getBoard_num());
+			ArrayList<CommentVO> clist = service.getComment(request, response);
+			request.setAttribute("clist", clist);
 			
 			request.getRequestDispatcher("/board/board_content.jsp").forward(request, response);
 			
@@ -132,7 +137,6 @@ public class board_controller extends HttpServlet {
 				
 				out.println("<script>");
 				out.println("alert ('" + msg + "');");
-				out.println("location.href = 'board_list.board';");
 				out.println("</script>");
 				
 				request.getRequestDispatcher("/board/board_list.board").forward(request, response);
@@ -140,7 +144,41 @@ public class board_controller extends HttpServlet {
 			
 			break;
 		
-		
+		case "/board/board_writeComment.board":	
+			
+			int result3 = service.writeComment(request, response);
+			
+			if(result3 == 1) {
+				String msg = "댓글이 등록되었습니다.";
+				response.setContentType("text/html; charset = utf-8");
+				PrintWriter out = response.getWriter();
+				
+				out.println("<script>");
+				out.println("alert ('" + msg + "');");
+				out.println("</script>");
+				response.sendRedirect("board_content.board?bno=" + request.getParameter("bno"));
+			}
+			
+			break;
+			
+		case "/board/board_deleteComment.board":	
+			
+			int result4 = service.deleteComment(request, response);
+			
+			if(result4 == 1) {
+				String msg = "댓글이 삭제되었습니다.";
+				response.setContentType("text/html; charset = utf-8");
+				PrintWriter out = response.getWriter();
+				
+				out.println("<script>");
+				out.println("alert ('" + msg + "');");
+				out.println("</script>");
+				response.sendRedirect("board_content.board?board_num=" + request.getParameter("board_num"));
+				
+			}
+			
+			break;
+			
 		default:
 			break;
 		}

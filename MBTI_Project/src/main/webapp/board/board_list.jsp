@@ -33,7 +33,7 @@
 						<td>${vo.board_num }</td>
 						<td>[${vo.mbti}] ${vo.user_id }</td>
 						<td>
-						<a href ="board_content.board?board_num=${vo.board_num }user_id=${vo.user_id }">${vo.title }</a>
+						<a href ="board_content.board?board_num=${vo.board_num }&user_id=${vo.user_id }">${vo.title }</a>
 						</td>
 						<td>
 						<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
