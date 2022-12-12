@@ -320,7 +320,7 @@ public class BoardDAO {
 	public int writeComment(String id, String board_num, String comment) {
 		int result = 0;
 		
-		String sql = "insert into comments values(commentnum_seq, ?, ?, ?, sysdate)";
+		String sql = "insert into comments values(commentnum_seq.nextval, ?, ?, ?, sysdate)";
 		
 		try {
 			conn = DriverManager.getConnection(URL, UID, UPW);

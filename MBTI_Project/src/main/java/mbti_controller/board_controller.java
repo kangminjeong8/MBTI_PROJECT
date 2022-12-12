@@ -156,7 +156,7 @@ public class board_controller extends HttpServlet {
 				out.println("<script>");
 				out.println("alert ('" + msg + "');");
 				out.println("</script>");
-				response.sendRedirect("board_content.board?bno=" + request.getParameter("bno"));
+				response.sendRedirect("board_content.board?board_num=" + request.getParameter("board_num"));
 			}
 			
 			break;

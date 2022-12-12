@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ include file = "/include/header.jsp"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,8 +27,8 @@
                                 <h1 class="display-5 fw-bolder text-white mb-2">MBTI_Project <br>강민정, 신지수<br> 이민재, 이세민</h1>
                                 <p class="lead fw-normal text-white-50 mb-4">MBTI_Project 검사가 너무 정확해 "살짝 소름이 돋을 정도예요"라고 성격 유형 검사를 마친 한 참여자는 말했습니다.</p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/test/mbti_test/mbti_test.jsp">검사하기</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="/test/mbti_info/mbti_info.jsp">MBTI 특징보기</a>
+                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="${pageContext.request.contextPath}/mbti_test/mbti_test.mbti">검사하기</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="${pageContext.request.contextPath}/mbti_info/mbti_info.mbti">MBTI 특징보기</a>
                                 </div>
                             </div>
                         </div>

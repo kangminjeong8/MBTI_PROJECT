@@ -67,9 +67,29 @@ protected void doAction(HttpServletRequest request, HttpServletResponse response
 		request.getRequestDispatcher("/mbti/mbti_" + answer + ".jsp").forward(request, response);
 		
 		break;
-
-
 		
+		
+	case "/mbti_info/mbti_info.mbti":
+		
+		request.getRequestDispatcher("/mbti_info/mbti_info.jsp").forward(request, response);
+		
+		break;
+		
+	case "/mbti_myinfo/mbti_myinfo.mbti": // info 절대경로 다시 설정해야 할 듯?
+	      
+	      String mbti = request.getParameter("mbti");
+	      
+	      ArrayList<HistoryVO> list2 = service.selectHistory(request, response); // 이력 가져오기 - 로그인이 된 상태면 리스트를 가져올거임
+	      request.setAttribute("list", list2);
+	      
+	      request.getRequestDispatcher("/mbti/mbti_" + mbti + ".jsp").forward(request, response);
+	      
+	      break;
+	
+	case "/mbti_test/mbti_test.mbti":
+		
+		  request.getRequestDispatcher("/mbti_test/mbti_test.jsp").forward(request, response);
+		 
 	default:
 		break;
 	}

@@ -2,17 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ include file = "/include/header.jsp"%>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
-
-
 <div align="center" class="div_center">
 	
 	
@@ -51,10 +44,7 @@
 			</td>
 		</tr>
 		
-		
-		
 		<!-- ///////////////////////댓글 구현////////////////////////////// -->
-		<!-- 여긴 반복문 돌리자 -->
 		
 		<td colspan="5" align = "center">댓글</td>
 		
@@ -83,8 +73,6 @@
 	</table>
 	</form>
 </div>
-
-
 
 </body>
 </html>

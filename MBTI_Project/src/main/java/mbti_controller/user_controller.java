@@ -48,7 +48,7 @@ public class user_controller extends HttpServlet {
 		switch (command) {
 		case "/user/user_join.user":
 			
-			request.getRequestDispatcher("user_join.jsp").forward(request, response);
+			response.sendRedirect("user_join.jsp");
 			
 			break;
 			
@@ -86,8 +86,7 @@ public class user_controller extends HttpServlet {
 				session.setAttribute("user_id", vo.getId());
 				session.setAttribute("user_name", vo.getName());
 				
-				//마이페이지
-				response.sendRedirect("user_mypage.user");
+				response.sendRedirect("../index.jsp");
 			}
 			
 			break;
