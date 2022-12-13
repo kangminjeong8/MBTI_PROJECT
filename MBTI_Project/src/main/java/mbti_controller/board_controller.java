@@ -15,6 +15,9 @@ import board_model.BoardVO;
 import board_model.CommentVO;
 import board_service.BoardService;
 import board_service.BoardServiceImpl;
+import mbti_model.HistoryVO;
+import mbti_service.MbtiService;
+import mbti_service.MbtiServiceImpl;
 
 @WebServlet("*.board")
 public class board_controller extends HttpServlet {
@@ -50,17 +53,15 @@ public class board_controller extends HttpServlet {
 		
 		case "/board/board_write.board":
 			
-			//임시로 풀었음 ////////////////////////////
-//			if(session.getAttribute("user_id") == null) {
-//				response.sendRedirect("/user/user_login.user");
-//				return;
-//			}
+			if(session.getAttribute("user_id") == null) {
+				response.sendRedirect("/user/user_login.user");
+				return;
+			}
 			
-			String mbti = service.getMbti(request, response);
-			System.out.println(mbti);
-			System.out.println("test");
+			MbtiService mservice = new MbtiServiceImpl();
+			HistoryVO vo = mservice.getRecentHistory(request, response);
 			
-			request.setAttribute("mbti", mbti);
+			request.setAttribute("vo", vo);
 			
 			request.getRequestDispatcher("/board/board_write.jsp").forward(request, response);
 			
@@ -68,11 +69,9 @@ public class board_controller extends HttpServlet {
 		
 		case "/board/registerForm.board":
 			
-			
-			
 			service.write(request, response);
 			
-			response.sendRedirect("/board/board_list.board");
+			request.getRequestDispatcher("/board/board_list.board").forward(request, response);
 			
 			break;
 		
@@ -87,11 +86,11 @@ public class board_controller extends HttpServlet {
 
 		case "/board/board_content.board":
 			//게시판 내용 받아오기
-			BoardVO vo = service.getContent(request, response);
-			request.setAttribute("vo", vo);
+			BoardVO vo2 = service.getContent(request, response);
+			request.setAttribute("vo", vo2);
 
 			//댓글 내용 받아오기
-			request.setAttribute("board_num", vo.getBoard_num());
+			request.setAttribute("board_num", vo2.getBoard_num());
 			ArrayList<CommentVO> clist = service.getComment(request, response);
 			request.setAttribute("clist", clist);
 			

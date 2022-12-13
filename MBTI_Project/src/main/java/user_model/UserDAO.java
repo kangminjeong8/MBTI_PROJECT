@@ -25,7 +25,7 @@ public class UserDAO {
 		return instance;
 	}
 
-	public String URL = "jdbc:oracle:thin:@172.30.1.44:1521:xe";
+	public String URL = "jdbc:oracle:thin:@172.30.1.63:1521:xe";
 	public String UID = "MBTI";
 	public String UPW = "mbti";
 

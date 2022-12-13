@@ -27,7 +27,7 @@ public class BoardDAO {
 	}
 	
 	//DB접속 위한 기본 셋팅
-	String URL = "jdbc:oracle:thin:@172.30.1.44:1521:xe";
+	String URL = "jdbc:oracle:thin:@172.30.1.63:1521:xe";
 	String UID = "MBTI";
 	String UPW = "mbti";
 	
@@ -43,8 +43,8 @@ public class BoardDAO {
 		System.out.println(title);
 		System.out.println(content);
 		
-//		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, sysdate)";
-		String sql = "insert into board values(4, ?, ?, ?, sysdate)";
+		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, sysdate)";
+//		String sql = "insert into board values(4, ?, ?, ?, sysdate)";
 		
 		try {
 			
@@ -211,7 +211,7 @@ public class BoardDAO {
 	public String getMbti(String user_id) {
 		String result = "";
 		
-		String sql = "select mbti\r\n"
+		String sql = "select *\r\n"
 				+ "from ( select rownum, h.* from history h where id = ? \r\n"
 				+ "        order by historynumber desc\r\n"
 				+ ")\r\n"
@@ -226,6 +226,7 @@ public class BoardDAO {
 			
 			if(rs.next()) {
 				result = rs.getString("MBTI");
+				result = result.toUpperCase();
 			}
 			
 			System.out.println(result);

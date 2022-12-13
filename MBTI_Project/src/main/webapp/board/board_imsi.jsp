@@ -7,18 +7,13 @@
 <link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet">
 
 
+   <h4 class="con">게시글 상세</h4>
    <br><br>
-   	<form action="board_writeComment.board" method="post">
-	<input type = "hidden" name = "board_num" value = "${vo.board_num }">
+   
     <section class="article-detail table-common con row">
         <div class="article-writer cell">
-        		<c:if test="${sessionScope.gender eq m }">
-                <div class="writer-icon"><image src = "${pageContext.request.contextPath }/board/m.png"></div>
-        		</c:if>
-        		<c:if test="${sessionScope.gender eq f }">
-                <div class="writer-icon"><image src = "${pageContext.request.contextPath }/board/f.png"></div>
-        		</c:if>
-                <span></span>
+                <div class="writer-icon">이미지</div>
+                <span>[${vo.mbti}] ${vo.user_id }</span>
         </div>
         
         <table class="cell" border="1">
@@ -31,29 +26,17 @@
                     <td colspan="3">${vo.title }</td>
                 </tr>
                 <tr class="article-info">
-                    <th>작성자</th>
-                    <td>[${vo.mbti}] ${vo.user_id }</td>
                     <th>날짜</th>
                     <td>${vo.regdate }</td>
+                    <th>조회수</th>
+                    <td>내용4_2</td>
                 </tr>
                 <tr class="article-body">
                     <td colspan="4">${vo.content }</td>
                 </tr>
             </tbody>
-            <tr>
-			<td colspan="5" align="right">
-				<input type="button" value="목록" onclick="location.href = 'board_list.board'">&nbsp;&nbsp;
-				
-				<c:if test = "${sessionScope.user_id != null }">
-				<input type="button" value="수정" onclick="location.href = 'board_modify.board?board_num=${vo.board_num}&user_id=${vo.user_id }'">&nbsp;&nbsp;
-				<input type="button" value="삭제" onclick="location.href = 'board_delete.board?board_num=${vo.board_num}&user_id=${vo.user_id }'">&nbsp;&nbsp;
-				</c:if>
-			</td>
-		</tr>
-            
         </table>
     </section>
-	
 	
 <div class="con reply">
     <h4 class="">댓글 목록</h4>
@@ -77,6 +60,7 @@
     </section>
     
     <section class="reply-form">
+        <form action="board_writeComment.board" method="post">
 		<tr>
 			<td>댓글 작성</td>
 			<td>
@@ -88,10 +72,11 @@
 				<input type="submit" value="등록">&nbsp;&nbsp;
 			</td>
 		</tr>
+        </form>
     </section>
     
 </div>
-</form>
+
 <%@include file = "../include/footer.jsp"  %>
 
 

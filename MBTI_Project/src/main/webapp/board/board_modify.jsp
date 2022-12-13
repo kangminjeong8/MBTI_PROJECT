@@ -1,58 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
+
+<%@ include file = "/include/header.jsp"%>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+
+<style>
+
+body {
+
+  padding-top: 70px;
+
+  padding-bottom: 30px;
+
+}
+
+
+
+</style>
+
 </head>
+
+
+
+
+
+
+
+
+
 <body>
 
+   <article>
+
+      <div class="container" role="main">
+
+         <h2>게시글 작성</h2> <br>
+         
+         <form action="registerForm.board" method="post">
+
+            <div class="mb-3">
+
+               <label for="title">MBTI</label>
+
+               <input type="text" class="form-control" name="user_id" value="${mbti }" id="title" placeholder="MBTI를 입력해 주세요" readonly required>
+
+            </div>
+
+            <div class="mb-3">
+
+               <label for="reg_id">작성자</label>
+
+               <input type="text" class="form-control" name="user_id" value="aaa123" id="reg_id" placeholder="이름을 입력해 주세요" readonly required>
+
+            </div>
+
+            <div class="mb-3">
 
 
+               <label for="title">제목</label>
 
-<div align="center" class="div_center">
-	<h3>게시판 글 수정 페이지</h3>
-	<hr>
-	<form action="updateForm.board" method="post">
-		
-		<table border="1" width="500">
-			
-			<tr>
-				<input type = "hidden" name = "board_num" value = ${vo_modi.board_num }>
-				</td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="user_id" value="${vo_modi.user_id }" readonly></td>
-			</tr>
-			<tr>
-				<td>글 제목</td>
-				<td>
-					<input type="text" name="title" value="${vo_modi.title }">
-				</td>
-			</tr>
-			<tr>
-				<td>글 내용</td>
-				<td>
-					<!-- textarea는 value 속성이 없고 사이에 값을 넣으면 된다. -->
-					<textarea rows="10" style="width: 95%;" name="content"> 
-					${vo_modi.content }
-					</textarea>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="수정 하기">&nbsp;&nbsp;
-					<input type="button" value="목록" onclick="/board/board_list.board">        
-				</td>
-			</tr>
-			
-		</table>
-	</form>
-</div>
+               <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요" required>
+
+            </div>
+            
+
+            <div class="mb-3">
+
+               <label for="content">내용</label>
+
+               <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+
+            </div>
 
 
+         </form>
+
+         <div >
+
+            <button type="submit" class="btn btn-sm btn-primary" id="btnSave">작성완료</button>
+
+            <button type="button" class="btn btn-sm btn-primary" id="btnList" onclick="location.href='board_list.board'">목록</button>
+
+         </div>
+
+      </div>
+
+   </article>
 
 </body>
+
 </html>

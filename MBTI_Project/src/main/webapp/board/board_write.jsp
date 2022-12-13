@@ -1,59 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
+
+<%@ include file = "/include/header.jsp"%>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 <body>
 
+   <article>
 
-	<form action="registerForm.board" method="post">
-		<table border="1" width="500">
-			
-			
-			<tr>
-				<td>MBTI</td>
-				<td>
-					<input type="text" name="user_id" size="10" value="${mbti }" readonly required>
-				</td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td>
-					<input type="text" name="user_id" size="10" value="aaa123" readonly required>
-					<%-- <input type="text" name="user_id" size="10" value=" [${mbti }] ${sessionScope.user_id}" readonly required> --%>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>글 제목</td>
-				<td>
-					<input type="text" name="title" required>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>글 내용</td>
-				<td>
-					<textarea rows="10" style="width: 95%;" name="content"></textarea>
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="작성 완료">
-					&nbsp;&nbsp;
-					<input type="button" value="목록" onclick="location.href='board_list.board'">         
-				</td>
-			</tr>
-			
-		</table>
-	</form>
+      <div class="container" role="main">
+
+		<br><br><br>
+         <h2 align = "center">게시글 작성</h2> <br>
+         
+         <form action="registerForm.board" method="post">
+
+            <div class="mb-3">
+
+               <label for="title">MBTI</label>
+               <input type="text" class="form-control" name="user_id" value="${vo.mbti }" readonly required>
+			   <input type="hidden" name = "historynumber" value ="${vo.historynumber }">
+            </div>
+
+            <div class="mb-3">
+
+               <label for="reg_id">작성자</label>
+
+               <input type="text" class="form-control" name="user_id" value="${sessionScope.user_id }" id="reg_id" placeholder="이름을 입력해 주세요" readonly required>
+
+            </div>
+
+            <div class="mb-3">
 
 
+               <label for="title">제목</label>
 
+               <input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요" required>
+
+            </div>
+            
+
+            <div class="mb-3">
+
+               <label for="content">내용</label>
+
+               <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+
+            </div>
+
+         <div >
+
+			<input type="submit"  class="btn btn-sm btn-primary" id="btnSave" value="작성 완료">
+            <button type="button" class="btn btn-sm btn-primary" id="btnList" onclick="location.href='board_list.board'">목록</button>
+
+         </div>
+
+         </form>
+
+
+      </div>
+
+   </article>
 
 </body>
+
 </html>

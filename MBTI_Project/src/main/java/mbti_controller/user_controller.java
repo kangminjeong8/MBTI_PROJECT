@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-
-import oracle.net.aso.l;
 import user_model.UserVO;
 import user_service.UserServiceImpl;
 
@@ -85,6 +83,7 @@ public class user_controller extends HttpServlet {
 				HttpSession session = request.getSession(); //자바에서 현재 세션 얻는 방법
 				session.setAttribute("user_id", vo.getId());
 				session.setAttribute("user_name", vo.getName());
+				session.setAttribute("gender", vo.getGender());
 				
 				response.sendRedirect("../index.jsp");
 			}

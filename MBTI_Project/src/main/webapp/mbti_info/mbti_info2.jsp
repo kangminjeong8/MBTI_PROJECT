@@ -11,7 +11,7 @@
    <form action = "/MBTI_Project/mbti_info/mbti_info.mbti" method="post">
    
    <button onClick="location.href='/MBTI_Project/mbti/mbti_info.mbti'" name = "mbti" value="enfj">
-      <img alt="ENFJ" src="/MBTI_Project/img/enfj.png">
+      <img alt="ENFJ" src="/MBTI_Project/mbti_image/ENFJ.png" height="280" width="400">
    </button>
    <button onClick="location.href='/MBTI_Project/mbti/mbti_info.mbti'" name = "mbti" value="enfp">
       <img alt="ENFP" src="/MBTI_Project/img/enfp.png">

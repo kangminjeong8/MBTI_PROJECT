@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.tribes.util.Arrays;
-
 import mbti_model.HistoryVO;
 import mbti_model.MbtiDAO;
 
@@ -20,15 +18,15 @@ public class MbtiServiceImpl implements MbtiService {
 	public int insertHistory(HttpServletRequest request, HttpServletResponse response) {
 		
 		//로그인한 유저의 아이디값 얻기
-//		HttpSession session = request.getSession();
-//		String id = (String)session.getAttribute("user_id");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("user_id");
 		
 		//검사해서 나온 mbti 값
 		String mbti = (String)request.getAttribute("mbti");
 		String mbti2 = mbti.toUpperCase();
 		System.out.println(mbti);
 		MbtiDAO dao = MbtiDAO.getInstance();
-		int result = dao.insertHistory("id", mbti2);
+		int result = dao.insertHistory(id, mbti2);
 		return result;
 	}
 
@@ -45,6 +43,18 @@ public class MbtiServiceImpl implements MbtiService {
 		return list;
 		
 	}
-
-
+	
+	@Override
+	public HistoryVO getRecentHistory(HttpServletRequest request, HttpServletResponse response) {
+		HistoryVO vo = null;
+		MbtiDAO dao = MbtiDAO.getInstance();
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("user_id");
+		System.out.println(id+"확인 id");
+		vo = dao.getRecentHistory(id);
+		
+		return vo;
+	}
+	
+	
 }

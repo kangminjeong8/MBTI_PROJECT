@@ -28,7 +28,7 @@ public class MbtiDAO {
 		return instance;
 	}
 	
-	public String URL = "jdbc:oracle:thin:@172.30.1.44:1521:xe";
+	public String URL = "jdbc:oracle:thin:@172.30.1.63:1521:xe";
 	public String UID = "MBTI";
 	public String UPW = "mbti";
 
@@ -90,6 +90,42 @@ public class MbtiDAO {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
 		return list;
+	}
+	
+	public HistoryVO getRecentHistory(String user_id) {
+		HistoryVO vo = null;
+		String sql = "select *\r\n"
+				+ "from ( select rownum, h.* from history h where id = ? \r\n"
+				+ "        order by historynumber desc\r\n"
+				+ ")\r\n"
+				+ "where rownum = 1";
+		try {
+			conn = DriverManager.getConnection(URL,UID,UPW);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new HistoryVO();
+				vo.setHistorynumber(rs.getInt("historynumber"));
+				vo.setId(rs.getString("id"));
+				vo.setMbti(rs.getString("mbti"));
+				vo.setHistorydate(rs.getTimestamp("history_date"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn != null) conn.close();
+				if(pstmt != null) pstmt.close();
+				if(rs != null) rs.close();
+			} catch (Exception e2) {
+				System.out.println("close에러");
+			}
+		}
+		return vo;
 	}
 	
 }

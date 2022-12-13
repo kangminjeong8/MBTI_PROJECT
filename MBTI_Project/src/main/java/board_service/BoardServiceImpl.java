@@ -15,13 +15,13 @@ public class BoardServiceImpl implements BoardService{
 	@Override // 게시판 글 작성 메서드
 	public void write(HttpServletRequest request, HttpServletResponse response) {
 		
-		String user_id = (String)request.getParameter("user_id");
+		String historynumber = (String)request.getParameter("historynumber");
 		String title = (String)request.getParameter("title");
 		String content = (String)request.getParameter("content");
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
-		dao.write(user_id, title, content);
+		dao.write(historynumber, title, content);
 	}
 	
 	

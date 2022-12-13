@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file = "/include/header.jsp"%>
+<!-- Bootstrap Core CSS -->
+<link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet">
 
 <style>
 td, h4 {
@@ -66,36 +69,14 @@ input[type='radio']:checked:after {
 				"해야 할 일을 마지막까지 미룰 때가 많다."}; // p
 		%>
 
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-		<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>MBTI TEST</title>
-<script src="http://code.jquery.com/jquery-3.3.1.js"
-	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-	crossorigin="anonymous">
-	
-</script>
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous">
-	
-</script>
-</head>
 
 <body>
 	<form action="mbti_test_succeed.mbti" method="post">
-
+	
 		<tr>
 			<div class="col-md-12" />
 			<h4>
+			<br>
 				MBTI TEST <br> </br> 문항에 동의하지 않을수록 왼쪽, 동의할수록 오른쪽을 선택해주세요.<br>
 				가능하면 답변 시 중립을 선택하지 말아주세요.
 			</h4>
@@ -103,8 +84,8 @@ input[type='radio']:checked:after {
 				<table class="table">
 
 					<thead>
-
 						<tr>
+							<br>
 							<td>항목</td>
 							<td>아님</td>
 							<td></td>

@@ -1,45 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
+<%@ include file = "/include/header.jsp"%>
+<!-- Bootstrap Core CSS -->
+<link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet">
+
 <body>
-
-
 <div align="center" class="div_center">
-	<
+	
+	<br>
+	<br>
 	<h3>게시글 내용 보기</h3>
 	<hr>
+	
+	<form action="board_writeComment.board" method="post">
+	<input type = "hidden" name = "board_num" value = "${vo.board_num }">
+	
 	<table border="1" width="500">
 		<tr>
-			<td width="20%">글번호</td>
-			<td width="30%">${vo.board_num }</td>
-			
-			<td width="20%">MBTI</td>
-			<td width="30%">${vo.mbti }</td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td>${vo.user_id }</td>
+			<td colsapn ="2">작성자</td>
+			<td>[${vo.mbti}] ${vo.user_id }</td>
 			
 			<td>작성일</td>
-			<td >${vo.regdate }</td>
+			<td colspan = "2" >${vo.regdate }</td>
 		</tr>	
 		
 		<tr>
 			<td width="20%">글제목</td>
-			<td colspan="3">${vo.title }</td>
+			<td colspan="4">${vo.title }</td>
 		</tr>
 		<tr>
 			<td width="20%">글내용</td>
-			<td colspan="3" height="120px">${vo.content }</td>
+			<td colspan="4" height="120px">${vo.content }</td>
 		</tr>
 		
 		<tr>
-			<td colspan="4" align="center">
+			<td colspan="5" align="right">
 				<input type="button" value="목록" onclick="location.href = 'board_list.board'">&nbsp;&nbsp;
 				
 				<c:if test = "${sessionScope.user_id != null }">
@@ -49,10 +46,35 @@
 			</td>
 		</tr>
 		
+		<!-- ///////////////////////댓글 구현////////////////////////////// -->
+		
+		<td colspan="5" align = "center">댓글</td>
+		
+		<c:forEach var = "cvo" items="${clist }">
+			<tr>
+				<td>${cvo.id }</td>
+				<td colspan="3" height="10px">${cvo.comment }
+				<c:if test = "${cvo.id eq sessionScope.user_id}">
+				<input type="button" value="삭제" onclick="location.href = 'board_deleteComment.board?comment_num=${cvo.commentnum }&board_num=${cvo.boardnumber }'">&nbsp;&nbsp;
+				</c:if>
+			</tr>
+		</c:forEach>
+		
+		<tr>
+			<td>댓글 작성</td>
+			<td>
+				<textarea rows="2" style="width: 230%;" name="comment"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" align="right">
+				<input type="submit" value="등록">&nbsp;&nbsp;
+			</td>
+		</tr>
+		
 	</table>
+	</form>
 </div>
-
-
 
 </body>
 </html>
